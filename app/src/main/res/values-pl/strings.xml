@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pixelate</string>
+    <string name="service_label">Pixelate – przycisk Wyczyść wszystko</string>
+    <string name="service_description">Pokazuje stały przycisk „Wyczyść wszystko” na dole systemowego ekranu ostatnich aplikacji. Po jego użyciu Pixelate przewija karuzelę i uruchamia oryginalny przycisk systemowy. Nie zapisuje ani nie wysyła treści ekranu.</string>
+
+    <string name="screen_title">Pixelate</string>
+    <string name="screen_subtitle">Wyczyść wszystkie aplikacje bez szukania końca karuzeli.</string>
+    <string name="device_heading">Twój telefon</string>
+    <string name="device_model">Wykryty model: %1$s</string>
+    <string name="status_heading">Stan usługi</string>
+    <string name="status_enabled">Usługa Pixelate jest włączona</string>
+    <string name="status_disabled">Usługa Pixelate jest wyłączona</string>
+    <string name="status_connected">Usługa działa i jest połączona</string>
+    <string name="enable_service">Otwórz ustawienia dostępności</string>
+    <string name="test_button">Otwórz Ostatnie i przetestuj</string>
+    <string name="test_requires_service">Najpierw włącz usługę Pixelate w ustawieniach dostępności.</string>
+    <string name="settings_heading">Ustawienia działania</string>
+    <string name="settings_intro">Motyw zmienia się po zapisaniu. Pozostałe zmiany działają od następnego otwarcia Ostatnich. Nie trzeba ponownie uruchamiać usługi.</string>
+    <string name="theme_heading">Motyw aplikacji</string>
+    <string name="theme_system">Zgodny z systemem</string>
+    <string name="theme_light">Jasny</string>
+    <string name="theme_dark">Ciemny</string>
+    <string name="theme_explanation">Opcja „Zgodny z systemem” automatycznie dopasowuje się do jasnego lub ciemnego wyglądu Androida. Opcje „Jasny” i „Ciemny” zachowują wybrany wygląd niezależnie od ustawienia systemowego.</string>
+    <string name="focus_button_setting">Ustaw fokus czytnika na przycisku</string>
+    <string name="focus_button_explanation">Zalecane dla TalkBacka oraz Jieshuo, czyli Commentary Screen Reader. Po otwarciu Ostatnich fokus zostanie przeniesiony bezpośrednio na „Wyczyść wszystko”, ponieważ przycisk jest osobnym oknem Androida. Wyłącz, jeśli wolisz znajdować go palcem.</string>
+    <string name="timeout_label">Limit szukania przycisku, w sekundach</string>
+    <string name="timeout_input_description">Limit czasu szukania systemowego przycisku w sekundach</string>
+    <string name="timeout_explanation">Domyślnie 20 sekund. Wartość 0 oznacza szukanie bez limitu i może zużywać baterię, jeśli Pixel Launcher zmieni sposób działania.</string>
+    <string name="timeout_invalid">Wpisz pełną liczbę sekund.</string>
+    <string name="timeout_range">Dozwolona wartość mieści się w zakresie od 0 do 300.</string>
+    <string name="save_settings">Zapisz ustawienia</string>
+    <string name="settings_saved">Ustawienia zapisane</string>
+    <string name="battery_explanation">Oszczędzanie baterii: poza ekranem Ostatnich Pixelate reaguje tylko na zmiany okien. Nie skanuje zawartości zwykłych aplikacji, nie działa w pętli i nie używa sieci, alarmów ani blokady wybudzenia. Niewielka usługa dostępności pozostaje w pamięci, aby przycisk mógł pojawić się natychmiast.</string>
+    <string name="how_it_works_heading">Jak to działa</string>
+    <string name="how_it_works_body">1. Włącz usługę Pixelate w ustawieniach dostępności.\n\n2. Otwórz ekran ostatnich aplikacji w zwykły sposób.\n\n3. Jeśli są otwarte aplikacje, na dole pojawi się przycisk „Wyczyść wszystko”. Przy pustej liście nie będzie pokazywany.\n\n4. Naciśnij przycisk. Pixelate sam przewinie karuzelę i uruchomi systemowe czyszczenie.</string>
+    <string name="privacy_heading">Prywatność</string>
+    <string name="privacy_body">Pixelate działa wyłącznie na urządzeniu, nie ma dostępu do internetu i niczego nie wysyła. Usługa reaguje tylko na zmiany okien i sprawdza strukturę Pixel Launchera wyłącznie na ekranie ostatnich aplikacji.</string>
+    <string name="icon_description">Pikselowa, uśmiechnięta twarz – ikona Pixelate</string>
+    <string name="unsupported_heading">Nieobsługiwane urządzenie</string>
+    <string name="unsupported_message">Pixelate obsługuje wyłącznie fizyczne urządzenia Google Pixel z Pixel Launcherem. Na tym urządzeniu nie zostanie uruchomione. Wykryte urządzenie: %1$s %2$s.</string>
+    <string name="unsupported_service_disabled">Usługa Pixelate została wyłączona, ponieważ to urządzenie nie jest obsługiwanym Google Pixelem.</string>
+    <string name="close_app">Zamknij Pixelate</string>
+
+    <string name="overlay_clear_all">Wyczyść wszystko</string>
+    <string name="overlay_clearing">Czyszczenie…</string>
+    <string name="overlay_window_title">Przyciski Pixelate</string>
+    <string name="overlay_button_description">Wyczyść wszystkie ostatnie aplikacje</string>
+    <string name="clear_success">Wyczyszczono ostatnie aplikacje</string>
+    <string name="clear_failure">Upłynął ustawiony czas szukania systemowego przycisku. Możesz spróbować ponownie.</string>
+    <string name="clear_no_tasks">Nie znaleziono aplikacji do wyczyszczenia</string>
+</resources>

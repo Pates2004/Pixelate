@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pixelate</string>
+    <string name="service_label">Pixelate – Clear all button</string>
+    <string name="service_description">Shows a permanent Clear all button at the bottom of the system Recents screen. When pressed, Pixelate scrolls the carousel and activates the original system button. It does not store or transmit screen content.</string>
+
+    <string name="screen_title">Pixelate</string>
+    <string name="screen_subtitle">Clear every recent app without hunting for the end of the carousel.</string>
+    <string name="device_heading">Your phone</string>
+    <string name="device_model">Detected model: %1$s</string>
+    <string name="status_heading">Service status</string>
+    <string name="status_enabled">The Pixelate service is enabled</string>
+    <string name="status_disabled">The Pixelate service is disabled</string>
+    <string name="status_connected">The service is running and connected</string>
+    <string name="enable_service">Open accessibility settings</string>
+    <string name="test_button">Open Recents and test</string>
+    <string name="test_requires_service">Enable the Pixelate service in Accessibility settings first.</string>
+    <string name="settings_heading">Behavior settings</string>
+    <string name="settings_intro">The theme changes after saving. Other changes apply the next time Recents is opened. The service does not need to be restarted.</string>
+    <string name="theme_heading">App theme</string>
+    <string name="theme_system">Follow system</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_explanation">Follow system automatically matches Android’s light or dark appearance. Light and Dark keep the selected appearance regardless of the system setting.</string>
+    <string name="focus_button_setting">Focus the button for the screen reader</string>
+    <string name="focus_button_explanation">Recommended for TalkBack and Jieshuo, also known as Commentary Screen Reader. After Recents opens, accessibility focus moves directly to Clear all because the button is a separate Android window. Turn this off if you prefer locating it by touch.</string>
+    <string name="timeout_label">Button search limit, in seconds</string>
+    <string name="timeout_input_description">System button search time limit in seconds</string>
+    <string name="timeout_explanation">The default is 20 seconds. A value of 0 means no limit and may consume battery if Pixel Launcher changes its behavior.</string>
+    <string name="timeout_invalid">Enter a whole number of seconds.</string>
+    <string name="timeout_range">The allowed value is in the range from 0 to 300.</string>
+    <string name="save_settings">Save settings</string>
+    <string name="settings_saved">Settings saved</string>
+    <string name="battery_explanation">Battery saving: Pixelate reacts only to window changes outside Recents. It does not scan ordinary apps, run a background loop, use the network, schedule alarms, or hold a wake lock. A small accessibility service remains in memory so the button can appear immediately.</string>
+    <string name="how_it_works_heading">How it works</string>
+    <string name="how_it_works_body">1. Enable Pixelate in Accessibility settings.\n\n2. Open the Recents screen normally.\n\n3. If recent apps exist, a Clear all button appears at the bottom. It stays hidden when the list is empty.\n\n4. Press the button. Pixelate scrolls the carousel and activates the system Clear all action.</string>
+    <string name="privacy_heading">Privacy</string>
+    <string name="privacy_body">Pixelate works entirely on your device, has no Internet access, and sends nothing. It reacts only to window changes and inspects Pixel Launcher structure exclusively on the Recents screen.</string>
+    <string name="icon_description">A smiling pixel face – the Pixelate icon</string>
+    <string name="unsupported_heading">Unsupported device</string>
+    <string name="unsupported_message">Pixelate supports only physical Google Pixel devices with Pixel Launcher. It will not run on this device. Detected device: %1$s %2$s.</string>
+    <string name="unsupported_service_disabled">Pixelate was disabled because this is not a supported Google Pixel device.</string>
+    <string name="close_app">Close Pixelate</string>
+
+    <string name="overlay_clear_all">Clear all</string>
+    <string name="overlay_clearing">Clearing…</string>
+    <string name="overlay_window_title">Pixelate controls</string>
+    <string name="overlay_button_description">Clear all recent applications</string>
+    <string name="clear_success">Recent applications cleared</string>
+    <string name="clear_failure">The configured system button search time expired. You can try again.</string>
+    <string name="clear_no_tasks">No recent applications were found</string>
+</resources>
