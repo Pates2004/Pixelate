@@ -6,8 +6,7 @@
 
     <string name="screen_title">Pixelate</string>
     <string name="screen_subtitle">Clear every recent app without hunting for the end of the carousel.</string>
-    <string name="device_heading">Your phone</string>
-    <string name="device_model">Detected model: %1$s</string>
+    <string name="device_model">Your phone: %1$s</string>
     <string name="status_heading">Service status</string>
     <string name="status_enabled">The Pixelate service is enabled</string>
     <string name="status_disabled">The Pixelate service is disabled</string>

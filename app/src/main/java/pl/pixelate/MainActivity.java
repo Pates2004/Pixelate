@@ -89,14 +89,12 @@ public final class MainActivity extends Activity {
         TextView subtitle = text(getString(R.string.screen_subtitle), 17, false);
         subtitle.setGravity(Gravity.CENTER);
         subtitle.setTextColor(dark ? Color.rgb(203, 213, 225) : Color.rgb(71, 85, 105));
-        content.addView(subtitle, matchWrap(dp(28)));
+        content.addView(subtitle, matchWrap(dp(14)));
 
-        LinearLayout deviceCard = (LinearLayout) card();
-        deviceCard.addView(
-                sectionHeading(getString(R.string.device_heading)), matchWrap(dp(10)));
-        TextView detectedModel = body(getString(R.string.device_model, Build.MODEL));
-        deviceCard.addView(detectedModel, matchWrap(0));
-        content.addView(deviceCard, matchWrap(dp(18)));
+        TextView detectedModel = text(getString(R.string.device_model, Build.MODEL), 16, true);
+        detectedModel.setGravity(Gravity.CENTER);
+        detectedModel.setTextColor(dark ? Color.rgb(103, 232, 249) : Color.rgb(8, 145, 178));
+        content.addView(detectedModel, matchWrap(dp(28)));
 
         statusCard = card();
         LinearLayout statusContent = (LinearLayout) statusCard;

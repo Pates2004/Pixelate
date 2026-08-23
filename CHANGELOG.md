@@ -1,5 +1,9 @@
 # Historia zmian
 
+## 1.3.1 — 2026-08-23
+
+- Uproszczono prezentację modelu telefonu do pojedynczej informacji w głównym oknie, bez dodatkowej karty lub sekcji.
+
 ## 1.3.0 — 2026-08-23
 
 - Dodano do głównego okna dostępną sekcję pokazującą model telefonu wykryty przez Androida.

@@ -10,14 +10,18 @@ Interfejs ma dwa języki: polski jest wybierany wyłącznie dla polskiego język
 
 ## Wydanie
 
-- Gotowe APK: dist/Pixelate-1.3.0.apk
+- Gotowe APK: dist/Pixelate-1.3.1.apk
 - Instrukcja instalacji: INSTRUKCJA.md
 - Kod usługi: app/src/main/java/pl/pixelate/PixelateAccessibilityService.java
 - Logika czyszczenia: app/src/main/java/pl/pixelate/ClearAllController.java
 - Wykrywanie Ostatnich: app/src/main/java/pl/pixelate/OverviewDetector.java
 - Nakładka: app/src/main/java/pl/pixelate/OverlayController.java
 
-## Co wnosi 1.3
+## Co wnosi 1.3.1
+
+- Model telefonu jest pokazany jako pojedyncza informacja w głównym oknie, bez dodatkowej karty ani zakładki.
+
+## Co wniosła wersja 1.3.0
 
 - Dostępna sekcja „Twój telefon” / „Your phone” pokazująca rzeczywisty model zgłaszany przez Androida.
 - Publiczne repozytorium projektu i gotowe wydanie APK na GitHubie.

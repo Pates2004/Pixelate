@@ -6,8 +6,7 @@
 
     <string name="screen_title">Pixelate</string>
     <string name="screen_subtitle">Wyczyść wszystkie aplikacje bez szukania końca karuzeli.</string>
-    <string name="device_heading">Twój telefon</string>
-    <string name="device_model">Wykryty model: %1$s</string>
+    <string name="device_model">Twój telefon: %1$s</string>
     <string name="status_heading">Stan usługi</string>
     <string name="status_enabled">Usługa Pixelate jest włączona</string>
     <string name="status_disabled">Usługa Pixelate jest wyłączona</string>
