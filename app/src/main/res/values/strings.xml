@@ -15,7 +15,7 @@
     <string name="test_button">Open Recents and test</string>
     <string name="test_requires_service">Enable the Pixelate service in Accessibility settings first.</string>
     <string name="settings_heading">Behavior settings</string>
-    <string name="settings_intro">The theme changes after saving. Other changes apply the next time Recents is opened. The service does not need to be restarted.</string>
+    <string name="settings_intro">Changes are saved automatically. The theme applies immediately, and behavior changes apply the next time Recents is opened. The service does not need to be restarted.</string>
     <string name="theme_heading">App theme</string>
     <string name="theme_system">Follow system</string>
     <string name="theme_light">Light</string>
@@ -28,8 +28,6 @@
     <string name="timeout_explanation">The default is 20 seconds. A value of 0 means no limit and may consume battery if Pixel Launcher changes its behavior.</string>
     <string name="timeout_invalid">Enter a whole number of seconds.</string>
     <string name="timeout_range">The allowed value is in the range from 0 to 300.</string>
-    <string name="save_settings">Save settings</string>
-    <string name="settings_saved">Settings saved</string>
     <string name="battery_explanation">Battery saving: Pixelate reacts only to window changes outside Recents. It does not scan ordinary apps, run a background loop, use the network, schedule alarms, or hold a wake lock. A small accessibility service remains in memory so the button can appear immediately.</string>
     <string name="how_it_works_heading">How it works</string>
     <string name="how_it_works_body">1. Enable Pixelate in Accessibility settings.\n\n2. Open the Recents screen normally.\n\n3. If recent apps exist, a Clear all button appears at the bottom. It stays hidden when the list is empty.\n\n4. Press the button. Pixelate scrolls the carousel and activates the system Clear all action.</string>

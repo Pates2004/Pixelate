@@ -1,5 +1,12 @@
 # Historia zmian
 
+## 1.4.0 — 2026-08-27
+
+- Usunięto przycisk zapisywania; motyw, fokus czytnika i poprawny limit czasu zapisują się automatycznie.
+- Skrócono stabilizację ekranu Ostatnich z 450 do 300 ms i reakcję na zdarzenie dostępności ze 140 do 80 ms.
+- Przyspieszono przejście z natywnych akcji przewijania na gest awaryjny z 44 do 20 prób.
+- Zachowano bezpieczne odstępy po przewijaniu, aby nie pogarszać niezawodności na wolniejszych animacjach Pixel Launchera.
+
 ## 1.3.1 — 2026-08-23
 
 - Uproszczono prezentację modelu telefonu do pojedynczej informacji w głównym oknie, bez dodatkowej karty lub sekcji.

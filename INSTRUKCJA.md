@@ -1,12 +1,12 @@
-# Pixelate 1.3.1 — instalacja i używanie
+# Pixelate 1.4.0 — instalacja i używanie
 
 ## Aktualizacja z wcześniejszej wersji
 
-Zainstaluj Pixelate-1.3.1.apk bez odinstalowywania poprzedniej wersji. Android zachowa ustawienia aplikacji i pozwoli na aktualizację, ponieważ wydania są podpisane tym samym kluczem. Po aktualizacji sprawdź, czy Android pozostawił usługę Pixelate włączoną.
+Zainstaluj Pixelate-1.4.0.apk bez odinstalowywania poprzedniej wersji. Android zachowa ustawienia aplikacji i pozwoli na aktualizację, ponieważ wydania są podpisane tym samym kluczem. Po aktualizacji sprawdź, czy Android pozostawił usługę Pixelate włączoną.
 
 ## Pierwsza instalacja
 
-1. Skopiuj Pixelate-1.3.1.apk na telefon, na przykład do folderu Pobrane.
+1. Skopiuj Pixelate-1.4.0.apk na telefon, na przykład do folderu Pobrane.
 2. Otwórz plik i wybierz Instaluj.
 3. Jeśli Android poprosi o zgodę na instalowanie z tego źródła, zezwól aplikacji Pliki, wróć i ponownie wybierz Instaluj.
 4. Otwórz Pixelate.
@@ -47,9 +47,11 @@ Przycisk Otwórz Ostatnie i przetestuj na ekranie Pixelate pozwala szybko sprawd
 
 ## Ustawienia Pixelate
 
-- Motyw aplikacji — „Zgodny z systemem” automatycznie przełącza cały ekran Pixelate między wyglądem jasnym i ciemnym. „Jasny” i „Ciemny” wymuszają wybrany wygląd niezależnie od ustawienia Androida.
-- Ustaw fokus czytnika na przycisku — domyślnie włączone. Jest przeznaczone dla TalkBacka i Jieshuo/Commentary Screen Reader, ponieważ nakładka jest osobnym oknem dostępności. Wyłącz tę opcję, jeśli korzystasz wzrokowo lub wolisz odnajdywać przycisk dotykiem.
-- Limit szukania przycisku — domyślnie 20 sekund, zakres od 0 do 300. Wartość 0 oznacza brak limitu. Jeśli lista jest pusta, Pixelate rozpozna to przed rozpoczęciem szukania niezależnie od tego ustawienia.
+Nie ma przycisku zapisywania. Każda poprawna zmiana zapisuje się automatycznie:
+
+- Motyw aplikacji — zapisuje się i zmienia od razu. „Zgodny z systemem” automatycznie przełącza cały ekran Pixelate między wyglądem jasnym i ciemnym. „Jasny” i „Ciemny” wymuszają wybrany wygląd niezależnie od ustawienia Androida.
+- Ustaw fokus czytnika na przycisku — zapisuje się natychmiast po przełączeniu. Domyślnie włączone. Jest przeznaczone dla TalkBacka i Jieshuo/Commentary Screen Reader, ponieważ nakładka jest osobnym oknem dostępności. Wyłącz tę opcję, jeśli korzystasz wzrokowo lub wolisz odnajdywać przycisk dotykiem.
+- Limit szukania przycisku — zapisuje się po zakończeniu wpisywania poprawnej wartości. Domyślnie 20 sekund, zakres od 0 do 300. Wartość 0 oznacza brak limitu. Jeśli lista jest pusta, Pixelate rozpozna to przed rozpoczęciem szukania niezależnie od tego ustawienia.
 
 ## Bateria
 
@@ -61,7 +63,7 @@ W pamięci pozostaje mała usługa dostępności, aby przycisk mógł pojawić s
 
 - Jeśli Pixelate nie występuje na liście usług albo nie daje się włączyć, wykonaj kroki dotyczące ustawień z ograniczeniami.
 - Jeśli przycisk nie pojawia się mimo istniejących kart, upewnij się, że domyślnym ekranem głównym jest Pixel Launcher. Wyłącz i ponownie włącz usługę Pixelate, a potem otwórz Ostatnie.
-- Jeśli Jieshuo nie przenosi fokusu, sprawdź w Pixelate, czy opcja Ustaw fokus czytnika na przycisku jest włączona, zapisz ustawienia i ponownie otwórz Ostatnie.
+- Jeśli Jieshuo nie przenosi fokusu, sprawdź w Pixelate, czy opcja Ustaw fokus czytnika na przycisku jest włączona, a następnie ponownie otwórz Ostatnie.
 - Jeśli po aktualizacji systemu pojawi się komunikat o upływie czasu, podaj wersję Androida i Pixel Launchera. Zmiana struktury launchera może wymagać aktualizacji Pixelate.
 
 ## Prywatność i usuwanie

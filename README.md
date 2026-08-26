@@ -10,14 +10,21 @@ Interfejs ma dwa języki: polski jest wybierany wyłącznie dla polskiego język
 
 ## Wydanie
 
-- Gotowe APK: dist/Pixelate-1.3.1.apk
+- Gotowe APK: dist/Pixelate-1.4.0.apk
 - Instrukcja instalacji: INSTRUKCJA.md
 - Kod usługi: app/src/main/java/pl/pixelate/PixelateAccessibilityService.java
 - Logika czyszczenia: app/src/main/java/pl/pixelate/ClearAllController.java
 - Wykrywanie Ostatnich: app/src/main/java/pl/pixelate/OverviewDetector.java
 - Nakładka: app/src/main/java/pl/pixelate/OverlayController.java
 
-## Co wnosi 1.3.1
+## Co wnosi 1.4.0
+
+- Wszystkie ustawienia zapisują się automatycznie; przycisk zapisywania nie jest już potrzebny.
+- Przycisk w Ostatnich pojawia się szybciej dzięki krótszej stabilizacji i reakcji na zdarzenia.
+- Przy długiej karuzeli Pixelate wcześniej przechodzi z natywnych akcji przewijania na gest awaryjny.
+- Optymalizacje pozostają zdarzeniowe i nie dodają pracy w tle.
+
+## Co wniosła wersja 1.3.1
 
 - Model telefonu jest pokazany jako pojedyncza informacja w głównym oknie, bez dodatkowej karty ani zakładki.
 
@@ -51,6 +58,8 @@ Wydanie zbudowano dla Android SDK 35 i przetestowano na emulatorze Androida 15 z
 - z aktywnym TalkBackiem systemowy fokus dostępności przechodzi do okna Pixelate i obejmuje przycisk;
 - z oficjalnym Jieshuo 20260821 systemowy fokus również przechodzi do okna Pixelate, a ramka czytnika obejmuje przycisk;
 - po wyłączeniu opcji fokusu TalkBack pozostaje na karcie aplikacji;
+- motyw, fokus czytnika i poprawny limit czasu zapisują się bez przycisku, a wartość spoza zakresu nie zastępuje poprzedniego ustawienia;
+- w porównawczym teście siedmiu otwarć mediana pojawienia przycisku spadła z 1237 ms w 1.3.1 do 1033 ms w 1.4.0;
 - pusta lista nie pokazuje nakładki;
 - ręczne usunięcie jedynej karty od razu ukrywa nakładkę;
 - test z 10 zadaniami potwierdził przewijanie i czyszczenie;

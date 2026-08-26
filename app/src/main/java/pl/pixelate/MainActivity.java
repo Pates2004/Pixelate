@@ -10,10 +10,15 @@ import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.text.TextUtils;
 import android.util.TypedValue;
+import android.view.inputmethod.EditorInfo;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +37,11 @@ import android.widget.Toast;
 import java.util.List;
 
 public final class MainActivity extends Activity {
+    private static final long TIMEOUT_AUTO_SAVE_DELAY_MS = 900;
+
+    private final Handler preferencesHandler = new Handler(Looper.getMainLooper());
+    private final Runnable timeoutSaveRunnable = () -> persistTimeout(false);
+    private final Runnable themeApplyRunnable = this::recreate;
     private TextView statusText;
     private View statusCard;
     private Button testButton;
@@ -59,6 +69,19 @@ public final class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         updateStatus();
+    }
+
+    @Override
+    protected void onPause() {
+        persistTimeout(false);
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        preferencesHandler.removeCallbacks(timeoutSaveRunnable);
+        preferencesHandler.removeCallbacks(themeApplyRunnable);
+        super.onDestroy();
     }
 
     private View buildContent() {
@@ -140,6 +163,7 @@ public final class MainActivity extends Activity {
         } else {
             themeSystemButton.setChecked(true);
         }
+        themeGroup.setOnCheckedChangeListener((group, checkedId) -> saveThemeAndApply());
         preferencesCard.addView(themeGroup, matchWrap(dp(4)));
         preferencesCard.addView(body(getString(R.string.theme_explanation)), matchWrap(dp(18)));
 
@@ -149,6 +173,8 @@ public final class MainActivity extends Activity {
         focusButtonSwitch.setTextColor(dark ? Color.WHITE : Color.rgb(15, 23, 42));
         focusButtonSwitch.setMinHeight(dp(56));
         focusButtonSwitch.setChecked(PixelatePreferences.shouldFocusClearButton(this));
+        focusButtonSwitch.setOnCheckedChangeListener((button, checked) ->
+                PixelatePreferences.setFocusClearButton(this, checked));
         preferencesCard.addView(focusButtonSwitch, matchWrap(dp(6)));
         preferencesCard.addView(
                 body(getString(R.string.focus_button_explanation)), matchWrap(dp(18)));
@@ -158,19 +184,43 @@ public final class MainActivity extends Activity {
         timeoutInput.setId(View.generateViewId());
         timeoutLabel.setLabelFor(timeoutInput.getId());
         timeoutInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+        timeoutInput.setImeOptions(EditorInfo.IME_ACTION_DONE);
         timeoutInput.setSingleLine(true);
         timeoutInput.setSelectAllOnFocus(true);
         timeoutInput.setText(String.valueOf(
                 PixelatePreferences.getSearchTimeoutSeconds(this)));
         timeoutInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         timeoutInput.setContentDescription(getString(R.string.timeout_input_description));
+        timeoutInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence value, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence value, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable value) {
+                preferencesHandler.removeCallbacks(timeoutSaveRunnable);
+                preferencesHandler.postDelayed(
+                        timeoutSaveRunnable, TIMEOUT_AUTO_SAVE_DELAY_MS);
+            }
+        });
+        timeoutInput.setOnFocusChangeListener((view, hasFocus) -> {
+            if (!hasFocus) {
+                persistTimeout(true);
+            }
+        });
+        timeoutInput.setOnEditorActionListener((view, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                persistTimeout(true);
+            }
+            return false;
+        });
         preferencesCard.addView(timeoutLabel, matchWrap(dp(4)));
         preferencesCard.addView(timeoutInput, matchWrap(dp(6)));
-        preferencesCard.addView(body(getString(R.string.timeout_explanation)), matchWrap(dp(16)));
-
-        Button saveSettingsButton = primaryButton(getString(R.string.save_settings));
-        saveSettingsButton.setOnClickListener(v -> savePreferences());
-        preferencesCard.addView(saveSettingsButton, matchWrap(dp(16)));
+        preferencesCard.addView(body(getString(R.string.timeout_explanation)), matchWrap(dp(18)));
         preferencesCard.addView(body(getString(R.string.battery_explanation)), matchWrap(0));
         content.addView(preferencesCard, matchWrap(dp(18)));
 
@@ -255,30 +305,42 @@ public final class MainActivity extends Activity {
         }
     }
 
-    private void savePreferences() {
+    private void saveThemeAndApply() {
+        String oldTheme = PixelatePreferences.getAppTheme(this);
+        String newTheme = selectedTheme();
+        if (oldTheme.equals(newTheme)) {
+            return;
+        }
+        PixelatePreferences.setAppTheme(this, newTheme);
+        preferencesHandler.removeCallbacks(themeApplyRunnable);
+        preferencesHandler.postDelayed(themeApplyRunnable, 250);
+    }
+
+    private void persistTimeout(boolean showEmptyError) {
+        if (timeoutInput == null) {
+            return;
+        }
+        preferencesHandler.removeCallbacks(timeoutSaveRunnable);
         String value = timeoutInput.getText().toString().trim();
+        if (value.isEmpty()) {
+            if (showEmptyError) {
+                timeoutInput.setError(getString(R.string.timeout_invalid));
+            }
+            return;
+        }
         int timeout;
         try {
             timeout = Integer.parseInt(value);
         } catch (NumberFormatException ignored) {
             timeoutInput.setError(getString(R.string.timeout_invalid));
-            timeoutInput.requestFocus();
             return;
         }
         if (timeout < 0 || timeout > PixelatePreferences.MAX_SEARCH_TIMEOUT_SECONDS) {
             timeoutInput.setError(getString(R.string.timeout_range));
-            timeoutInput.requestFocus();
             return;
         }
-        String oldTheme = PixelatePreferences.getAppTheme(this);
-        String newTheme = selectedTheme();
-        PixelatePreferences.save(
-                this, focusButtonSwitch.isChecked(), timeout, newTheme);
+        PixelatePreferences.setSearchTimeoutSeconds(this, timeout);
         timeoutInput.setError(null);
-        Toast.makeText(this, R.string.settings_saved, Toast.LENGTH_SHORT).show();
-        if (!oldTheme.equals(newTheme)) {
-            getWindow().getDecorView().postDelayed(this::recreate, 250);
-        }
     }
 
     static boolean isPixelateEnabled(Context context) {

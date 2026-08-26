@@ -21,7 +21,7 @@ final class ClearAllController {
         void onClearFailed(boolean noTasks);
     }
 
-    private static final int GESTURE_FALLBACK_AFTER = 44;
+    private static final int GESTURE_FALLBACK_AFTER = 20;
 
     private final PixelateAccessibilityService service;
     private final Listener listener;

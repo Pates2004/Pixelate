@@ -49,14 +49,23 @@ final class PixelatePreferences {
                 & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
     }
 
-    static void save(
-            Context context, boolean focusClearButton, int timeoutSeconds, String appTheme) {
+    static void setFocusClearButton(Context context, boolean focusClearButton) {
+        preferences(context).edit()
+                .putBoolean(KEY_FOCUS_CLEAR_BUTTON, focusClearButton)
+                .apply();
+    }
+
+    static void setSearchTimeoutSeconds(Context context, int timeoutSeconds) {
         int safeTimeout = Math.max(0, Math.min(MAX_SEARCH_TIMEOUT_SECONDS, timeoutSeconds));
+        preferences(context).edit()
+                .putInt(KEY_SEARCH_TIMEOUT_SECONDS, safeTimeout)
+                .apply();
+    }
+
+    static void setAppTheme(Context context, String appTheme) {
         String safeTheme = THEME_LIGHT.equals(appTheme) || THEME_DARK.equals(appTheme)
                 ? appTheme : THEME_SYSTEM;
         preferences(context).edit()
-                .putBoolean(KEY_FOCUS_CLEAR_BUTTON, focusClearButton)
-                .putInt(KEY_SEARCH_TIMEOUT_SECONDS, safeTimeout)
                 .putString(KEY_APP_THEME, safeTheme)
                 .apply();
     }

@@ -13,7 +13,7 @@ import java.lang.ref.WeakReference;
 
 public final class PixelateAccessibilityService extends AccessibilityService
         implements OverlayController.Listener, ClearAllController.Listener {
-    private static final long OVERVIEW_STABLE_MS = 450;
+    private static final long OVERVIEW_STABLE_MS = 300;
     private static final int IDLE_EVENT_TYPES = AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED
             | AccessibilityEvent.TYPE_WINDOWS_CHANGED;
     private static final int OVERVIEW_EVENT_TYPES = IDLE_EVENT_TYPES
@@ -57,7 +57,7 @@ public final class PixelateAccessibilityService extends AccessibilityService
         if (!connected) {
             return;
         }
-        scheduleEvaluation(140);
+        scheduleEvaluation(80);
     }
 
     @Override
