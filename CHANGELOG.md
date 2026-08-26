@@ -1,5 +1,13 @@
 # Historia zmian
 
+## 1.5.0 — 2026-08-27
+
+- Pixelate rozpoznaje rzeczywisty postęp karuzeli na podstawie widocznych kart i ich położenia.
+- Jeśli Pixel Launcher przyjmie dwie natywne akcje przewijania bez przesunięcia karuzeli, aplikacja automatycznie przechodzi na gest awaryjny zamiast czekać na sztywny limit prób.
+- Zachowano bezpieczny limit awaryjny dla wersji launchera, które nie udostępniają informacji o położeniu kart.
+- Kolejny krok po geście jest wykonywany po potwierdzeniu jego zakończenia przez Androida; dodatkowy watchdog chroni przed utknięciem po utraconym callbacku.
+- Dodano testy jednostkowe decyzji o przejściu z akcji natywnych na gest.
+
 ## 1.4.0 — 2026-08-27
 
 - Usunięto przycisk zapisywania; motyw, fokus czytnika i poprawny limit czasu zapisują się automatycznie.
