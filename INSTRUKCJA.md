@@ -1,12 +1,12 @@
-# Pixelate 1.5.0 — instalacja i używanie
+# Pixelate 1.4.0 — instalacja i używanie
 
 ## Aktualizacja z wcześniejszej wersji
 
-Zainstaluj Pixelate-1.5.0.apk bez odinstalowywania poprzedniej wersji. Android zachowa ustawienia aplikacji i pozwoli na aktualizację, ponieważ wydania są podpisane tym samym kluczem. Po aktualizacji sprawdź, czy Android pozostawił usługę Pixelate włączoną.
+Zainstaluj Pixelate-1.4.0.apk bez odinstalowywania poprzedniej wersji. Android zachowa ustawienia aplikacji i pozwoli na aktualizację, ponieważ wydania są podpisane tym samym kluczem. Po aktualizacji sprawdź, czy Android pozostawił usługę Pixelate włączoną.
 
 ## Pierwsza instalacja
 
-1. Skopiuj Pixelate-1.5.0.apk na telefon, na przykład do folderu Pobrane.
+1. Skopiuj Pixelate-1.4.0.apk na telefon, na przykład do folderu Pobrane.
 2. Otwórz plik i wybierz Instaluj.
 3. Jeśli Android poprosi o zgodę na instalowanie z tego źródła, zezwól aplikacji Pliki, wróć i ponownie wybierz Instaluj.
 4. Otwórz Pixelate.

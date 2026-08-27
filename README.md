@@ -10,21 +10,14 @@ Interfejs ma dwa języki: polski jest wybierany wyłącznie dla polskiego język
 
 ## Wydanie
 
-- Gotowe APK: dist/Pixelate-1.5.0.apk
+- Gotowe APK: dist/Pixelate-1.4.0.apk
 - Instrukcja instalacji: INSTRUKCJA.md
 - Kod usługi: app/src/main/java/pl/pixelate/PixelateAccessibilityService.java
 - Logika czyszczenia: app/src/main/java/pl/pixelate/ClearAllController.java
 - Wykrywanie Ostatnich: app/src/main/java/pl/pixelate/OverviewDetector.java
 - Nakładka: app/src/main/java/pl/pixelate/OverlayController.java
 
-## Co wnosi 1.5.0
-
-- Pixelate sprawdza, czy natywna akcja naprawdę przesunęła karuzelę, zamiast polegać wyłącznie na odpowiedzi launchera.
-- Po dwóch akcjach bez postępu automatycznie przechodzi na gest awaryjny; limit 20 akcji pozostaje zabezpieczeniem dla launcherów, które nie ujawniają położenia kart.
-- Po geście czeka na systemowe potwierdzenie jego zakończenia i ma dodatkowy watchdog chroniący przed utknięciem.
-- Normalna ścieżka, na której karuzela się przesuwa, zachowuje dotychczasową niezawodność i czasy.
-
-## Co wniosła wersja 1.4.0
+## Co wnosi 1.4.0
 
 - Wszystkie ustawienia zapisują się automatycznie; przycisk zapisywania nie jest już potrzebny.
 - Przycisk w Ostatnich pojawia się szybciej dzięki krótszej stabilizacji i reakcji na zdarzenia.
@@ -69,8 +62,7 @@ Wydanie zbudowano dla Android SDK 35 i przetestowano na emulatorze Androida 15 z
 - w porównawczym teście siedmiu otwarć mediana pojawienia przycisku spadła z 1237 ms w 1.3.1 do 1033 ms w 1.4.0;
 - pusta lista nie pokazuje nakładki;
 - ręczne usunięcie jedynej karty od razu ukrywa nakładkę;
-- test z 10 zadaniami potwierdził 9 kolejnych zmian położenia karuzeli i poprawne wyczyszczenie;
-- pomiar tej samej długiej karuzeli dał około 7,3–7,5 s zarówno dla 1.4.0, jak i 1.5.0; nowa logika nie spowalnia prawidłowej ścieżki, a skraca wyłącznie przypadek utknięcia;
+- test z 10 zadaniami potwierdził przewijanie i czyszczenie;
 - limit 1 sekundy przerwał szukanie i przywrócił aktywny przycisk;
 - poza Ostatnimi usługa nasłuchuje tylko zmian okna; pomiar wykazał 0% CPU, brak alarmów i brak blokady wybudzenia;
 - manifest nie zawiera uprawnień do internetu ani WAKE_LOCK.
