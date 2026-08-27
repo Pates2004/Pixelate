@@ -1,11 +1,5 @@
 # Historia zmian
 
-## 1.5.1 — 2026-08-27
-
-- Wycofano eksperymentalne, zbyt wczesne wykrywanie braku postępu karuzeli z wersji 1.5.0.
-- Przywrócono sprawdzoną ścieżkę: natywne przewijanie ma pełny bezpieczny limit 20 prób, a gest awaryjny uruchamia się dopiero później.
-- Usunięto callbacki gestów, które na niektórych Pixelach mogły nakładać gest na kończącą się animację i odbijać kartę aplikacji.
-
 ## 1.5.0 — 2026-08-27
 
 - Pixelate rozpoznaje rzeczywisty postęp karuzeli na podstawie widocznych kart i ich położenia.

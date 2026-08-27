@@ -21,14 +21,14 @@ final class ClearAllController {
         void onClearFailed(boolean noTasks);
     }
 
-    private static final int GESTURE_FALLBACK_AFTER = 20;
-
     private final PixelateAccessibilityService service;
     private final Listener listener;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final Runnable stepRunnable = this::step;
+    private final ScrollProgressTracker scrollProgress = new ScrollProgressTracker();
+
     private boolean running;
-    private int attempts;
+    private boolean taskListVerified;
     private long startedAt;
     private long timeoutMs;
 
@@ -42,7 +42,8 @@ final class ClearAllController {
             return;
         }
         running = true;
-        attempts = 0;
+        taskListVerified = false;
+        scrollProgress.reset();
         startedAt = SystemClock.uptimeMillis();
         timeoutMs = PixelatePreferences.getSearchTimeoutSeconds(service) * 1000L;
         schedule(40);
@@ -61,6 +62,7 @@ final class ClearAllController {
         if (!running) {
             return;
         }
+
         List<AccessibilityWindowInfo> windows = service.getWindows();
         AccessibilityNodeInfo clear = OverviewDetector.findClearAllButton(
                 windows, service.getPackageName(), service);
@@ -84,10 +86,13 @@ final class ClearAllController {
             return;
         }
 
-        if (attempts == 0 && !OverviewDetector.hasRecentTasks(
-                windows, service.getPackageName(), service)) {
-            finishFailure(true);
-            return;
+        if (!taskListVerified) {
+            taskListVerified = true;
+            if (!OverviewDetector.hasRecentTasks(
+                    windows, service.getPackageName(), service)) {
+                finishFailure(true);
+                return;
+            }
         }
 
         if (timeoutMs > 0 && SystemClock.uptimeMillis() - startedAt >= timeoutMs) {
@@ -95,10 +100,12 @@ final class ClearAllController {
             return;
         }
 
-        attempts++;
+        String progressSignature = OverviewDetector.getOverviewProgressSignature(
+                windows, service.getPackageName(), service);
+        scrollProgress.observe(progressSignature);
 
         boolean scrolled = false;
-        if (attempts < GESTURE_FALLBACK_AFTER) {
+        if (scrollProgress.shouldTryNativeAction()) {
             AccessibilityNodeInfo scroller = OverviewDetector.findOverviewScroller(
                     windows, service.getPackageName(), service);
             if (scroller != null) {
@@ -119,18 +126,21 @@ final class ClearAllController {
         }
 
         if (scrolled) {
+            scrollProgress.recordAcceptedNativeAction(progressSignature);
             schedule(135);
         } else {
-            dispatchSwipeTowardClearAll();
-            schedule(230);
+            scrollProgress.useGestureFromNowOn();
+            if (!dispatchSwipeTowardClearAll()) {
+                schedule(230);
+            }
         }
     }
 
-    private void dispatchSwipeTowardClearAll() {
+    private boolean dispatchSwipeTowardClearAll() {
         WindowManager manager = (WindowManager) service.getSystemService(PixelateAccessibilityService.WINDOW_SERVICE);
         Display display = manager == null ? null : manager.getDefaultDisplay();
         if (display == null) {
-            return;
+            return false;
         }
         Point size = new Point();
         display.getRealSize(size);
@@ -143,7 +153,30 @@ final class ClearAllController {
         GestureDescription gesture = new GestureDescription.Builder()
                 .addStroke(new GestureDescription.StrokeDescription(path, 0, 190))
                 .build();
-        service.dispatchGesture(gesture, null, handler);
+        boolean accepted = service.dispatchGesture(
+                gesture,
+                new android.accessibilityservice.AccessibilityService.GestureResultCallback() {
+                    @Override
+                    public void onCompleted(GestureDescription gestureDescription) {
+                        if (running) {
+                            schedule(35);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(GestureDescription gestureDescription) {
+                        if (running) {
+                            schedule(80);
+                        }
+                    }
+                },
+                handler);
+        if (accepted) {
+            // Defensive watchdog: Android normally invokes one callback, but a lost
+            // callback must never leave the button busy until the service restarts.
+            schedule(350);
+        }
+        return accepted;
     }
 
     private void finishFailure(boolean noTasks) {

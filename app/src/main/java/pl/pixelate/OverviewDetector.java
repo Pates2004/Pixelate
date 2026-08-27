@@ -178,6 +178,36 @@ final class OverviewDetector {
         return largestScrollable;
     }
 
+    static String getOverviewProgressSignature(
+            List<AccessibilityWindowInfo> windows, String ownPackage, Context context) {
+        if (windows == null) {
+            return null;
+        }
+        for (AccessibilityWindowInfo window : windows) {
+            if (!isInspectableWindow(window)) {
+                continue;
+            }
+            AccessibilityNodeInfo root = window.getRoot();
+            if (root == null) {
+                continue;
+            }
+            try {
+                String pkg = string(root.getPackageName());
+                if (TextUtils.equals(ownPackage, pkg)
+                        || !looksLikeOverviewWindow(window, root, context)) {
+                    continue;
+                }
+                String signature = buildTaskPositionSignature(root);
+                if (signature != null) {
+                    return signature;
+                }
+            } finally {
+                root.recycle();
+            }
+        }
+        return null;
+    }
+
     static boolean performClickWithAncestor(AccessibilityNodeInfo node) {
         AccessibilityNodeInfo current = AccessibilityNodeInfo.obtain(node);
         try {
@@ -392,6 +422,39 @@ final class OverviewDetector {
             }
         }
         return false;
+    }
+
+    private static String buildTaskPositionSignature(AccessibilityNodeInfo root) {
+        ArrayDeque<AccessibilityNodeInfo> queue = new ArrayDeque<>();
+        queue.add(AccessibilityNodeInfo.obtain(root));
+        StringBuilder signature = new StringBuilder();
+        int remaining = NODE_BUDGET;
+        int taskCount = 0;
+        while (!queue.isEmpty() && remaining-- > 0) {
+            AccessibilityNodeInfo node = queue.removeFirst();
+            String id = lower(node.getViewIdResourceName());
+            if (node.isVisibleToUser()
+                    && (isResourceId(id, "task") || id.contains("task_view"))) {
+                Rect bounds = new Rect();
+                node.getBoundsInScreen(bounds);
+                signature.append(normalize(string(node.getContentDescription())))
+                        .append('@').append(bounds.left)
+                        .append(',').append(bounds.top)
+                        .append(',').append(bounds.right)
+                        .append(',').append(bounds.bottom)
+                        .append(';');
+                taskCount++;
+            }
+            for (int i = 0; i < node.getChildCount(); i++) {
+                AccessibilityNodeInfo child = node.getChild(i);
+                if (child != null) {
+                    queue.addLast(child);
+                }
+            }
+            node.recycle();
+        }
+        recycleQueue(queue);
+        return taskCount == 0 ? null : signature.toString();
     }
 
     private static boolean isResourceId(String value, String entryName) {
