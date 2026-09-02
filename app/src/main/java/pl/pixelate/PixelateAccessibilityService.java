@@ -127,9 +127,7 @@ public final class PixelateAccessibilityService extends AccessibilityService
         if (!overview) {
             overviewVisibleSince = 0;
             suppressUntilOverviewExit = false;
-            if (clearer != null) {
-                clearer.cancel();
-            }
+            cancelClearOperation();
             overlay.hide();
         } else if (suppressUntilOverviewExit) {
             overlay.hide();
@@ -147,6 +145,9 @@ public final class PixelateAccessibilityService extends AccessibilityService
                 } else if (!tasks) {
                     overlay.hide();
                 } else {
+                    if (clearer == null || !clearer.isRunning()) {
+                        overlay.setBusy(false);
+                    }
                     overlay.show(PixelatePreferences.shouldFocusClearButton(this));
                 }
             }
@@ -178,8 +179,15 @@ public final class PixelateAccessibilityService extends AccessibilityService
     private void cancelWork() {
         handler.removeCallbacks(evaluateRunnable);
         evaluationScheduled = false;
+        cancelClearOperation();
+    }
+
+    private void cancelClearOperation() {
         if (clearer != null) {
             clearer.cancel();
+        }
+        if (overlay != null) {
+            overlay.setBusy(false);
         }
     }
 

@@ -10,14 +10,20 @@ Interfejs ma dwa języki: polski jest wybierany wyłącznie dla polskiego język
 
 ## Wydanie
 
-- Gotowe APK: dist/Pixelate-1.4.0.apk
+- Gotowe APK: dist/Pixelate-1.4.1.apk
 - Instrukcja instalacji: INSTRUKCJA.md
 - Kod usługi: app/src/main/java/pl/pixelate/PixelateAccessibilityService.java
 - Logika czyszczenia: app/src/main/java/pl/pixelate/ClearAllController.java
 - Wykrywanie Ostatnich: app/src/main/java/pl/pixelate/OverviewDetector.java
 - Nakładka: app/src/main/java/pl/pixelate/OverlayController.java
 
-## Co wnosi 1.4.0
+## Co wnosi 1.4.1
+
+- Przerwanie czyszczenia przyciskiem Wstecz lub wyjściem z Ostatnich zawsze ponownie aktywuje przycisk.
+- Dodatkowa kontrola przed pokazaniem nakładki naprawia także rzadki wyścig zdarzeń, który mógł pozostawić przycisk w stanie „Czyszczenie”.
+- Wydanie zachowuje sprawdzoną metodę przewijania z 1.4.0.
+
+## Co wniosła wersja 1.4.0
 
 - Wszystkie ustawienia zapisują się automatycznie; przycisk zapisywania nie jest już potrzebny.
 - Przycisk w Ostatnich pojawia się szybciej dzięki krótszej stabilizacji i reakcji na zdarzenia.
@@ -63,6 +69,7 @@ Wydanie zbudowano dla Android SDK 35 i przetestowano na emulatorze Androida 15 z
 - pusta lista nie pokazuje nakładki;
 - ręczne usunięcie jedynej karty od razu ukrywa nakładkę;
 - test z 10 zadaniami potwierdził przewijanie i czyszczenie;
+- przerwanie czyszczenia przyciskiem Wstecz natychmiast po aktywacji oraz w trakcie pierwszego przewinięcia pozostawiło przycisk aktywny przy ponownym wejściu do Ostatnich;
 - limit 1 sekundy przerwał szukanie i przywrócił aktywny przycisk;
 - poza Ostatnimi usługa nasłuchuje tylko zmian okna; pomiar wykazał 0% CPU, brak alarmów i brak blokady wybudzenia;
 - manifest nie zawiera uprawnień do internetu ani WAKE_LOCK.

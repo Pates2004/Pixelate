@@ -1,5 +1,12 @@
 # Historia zmian
 
+## 1.4.1 — 2026-09-02
+
+- Naprawiono wyszarzony przycisk po przerwaniu trwającego czyszczenia przyciskiem Wstecz lub opuszczeniem Ostatnich.
+- Wszystkie ścieżki anulowania przywracają tekst, wygląd i aktywność przycisku.
+- Przed pokazaniem nakładki Pixelate dodatkowo sprawdza, czy operacja czyszczenia naprawdę nadal trwa, co zabezpiecza przed wyścigiem zdarzeń dostępności.
+- Ustawiono `versionCode` 9, aby poprawkę można było zainstalować także na urządzeniach, na których wcześniej znalazły się wycofane wersje 1.5.x.
+
 ## 1.4.0 — 2026-08-27
 
 - Usunięto przycisk zapisywania; motyw, fokus czytnika i poprawny limit czasu zapisują się automatycznie.
