@@ -1,12 +1,12 @@
-# Pixelate 1.4.1 — instalacja i używanie
+# Pixelate 1.4.2 — instalacja i używanie
 
 ## Aktualizacja z wcześniejszej wersji
 
-Zainstaluj Pixelate-1.4.1.apk bez odinstalowywania poprzedniej wersji. Android zachowa ustawienia aplikacji i pozwoli na aktualizację, ponieważ wydania są podpisane tym samym kluczem. Po aktualizacji sprawdź, czy Android pozostawił usługę Pixelate włączoną.
+Zainstaluj Pixelate-1.4.2.apk bez odinstalowywania poprzedniej wersji. Android zachowa ustawienia aplikacji i pozwoli na aktualizację, ponieważ wydania są podpisane tym samym kluczem. Po aktualizacji sprawdź, czy Android pozostawił usługę Pixelate włączoną.
 
 ## Pierwsza instalacja
 
-1. Skopiuj Pixelate-1.4.1.apk na telefon, na przykład do folderu Pobrane.
+1. Skopiuj Pixelate-1.4.2.apk na telefon, na przykład do folderu Pobrane.
 2. Otwórz plik i wybierz Instaluj.
 3. Jeśli Android poprosi o zgodę na instalowanie z tego źródła, zezwól aplikacji Pliki, wróć i ponownie wybierz Instaluj.
 4. Otwórz Pixelate.
@@ -41,7 +41,7 @@ W głównym oknie aplikacji pojedyncza informacja „Twój telefon” pokazuje d
 1. Otwórz Ostatnie aplikacje tak jak zwykle.
 2. Jeśli istnieją karty aplikacji, na dole nad paskiem gestów pojawi się Wyczyść wszystko. Przy pustej liście przycisk pozostanie ukryty.
 3. Z TalkBackiem albo Jieshuo domyślne ustawienie przeniesie fokus bezpośrednio na przycisk po zakończeniu animacji Ostatnich. Wykonaj dwukrotne stuknięcie. Bez czytnika wystarczy zwykłe stuknięcie.
-4. Pixelate przewinie karuzelę i uruchomi prawdziwy systemowy przycisk. Karty aplikacji oraz przyciski Screenshot i Select pozostają normalnie widoczne i działają bez zmian.
+4. Pixelate spróbuje przejść bezpośrednio do systemowego przycisku, a jeśli się to nie uda, przewinie karuzelę dotychczasową metodą. Następnie uruchomi prawdziwy systemowy przycisk. Pozostałe elementy Ostatnich nadal działają normalnie.
 
 Przycisk Otwórz Ostatnie i przetestuj na ekranie Pixelate pozwala szybko sprawdzić konfigurację.
 

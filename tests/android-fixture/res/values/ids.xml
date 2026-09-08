@@ -1,0 +1,5 @@
+<resources>
+    <item name="overview_panel" type="id" />
+    <item name="task" type="id" />
+    <item name="clear_all" type="id" />
+</resources>

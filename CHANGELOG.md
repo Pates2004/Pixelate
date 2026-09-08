@@ -1,5 +1,14 @@
 # Historia zmian
 
+## 1.4.2 — 2026-09-08
+
+- Dodano jednorazową próbę ACTION_SHOW_ON_SCREEN na systemowym clear_all przed przewijaniem kart.
+- Po przyjęciu żądania aplikacja czeka krótko i ponownie odczytuje ekran. Nie klika niewidocznego węzła.
+- Brak akcji, odmowa lub brak skutku zachowują dotychczasowe przewijanie; szybka próba nie zapętla się.
+- Sprawdzenie opuszczenia Ostatnich i limitu czasu następuje przed akcjami na ekranie.
+- Dodano kontrolowany ekran testowy do weryfikacji odmowy, pozornego sukcesu i braku obsługi akcji.
+- versionCode 10; zachowano podpis umożliwiający aktualizację istniejącej instalacji.
+
 ## 1.4.1 — 2026-09-02
 
 - Naprawiono wyszarzony przycisk po przerwaniu trwającego czyszczenia przyciskiem Wstecz lub opuszczeniem Ostatnich.

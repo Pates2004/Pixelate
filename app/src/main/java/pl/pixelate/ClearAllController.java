@@ -22,6 +22,7 @@ final class ClearAllController {
     }
 
     private static final int GESTURE_FALLBACK_AFTER = 20;
+    private static final long REVEAL_SETTLE_MS = 180;
 
     private final PixelateAccessibilityService service;
     private final Listener listener;
@@ -29,6 +30,7 @@ final class ClearAllController {
     private final Runnable stepRunnable = this::step;
 
     private boolean running;
+    private boolean revealAttempted;
     private int attempts;
     private long startedAt;
     private long timeoutMs;
@@ -44,6 +46,7 @@ final class ClearAllController {
         }
         running = true;
         attempts = 0;
+        revealAttempted = false;
         startedAt = SystemClock.uptimeMillis();
         timeoutMs = PixelatePreferences.getSearchTimeoutSeconds(service) * 1000L;
         schedule(40);
@@ -64,6 +67,15 @@ final class ClearAllController {
         }
 
         List<AccessibilityWindowInfo> windows = service.getWindows();
+        // Check cancellation conditions before performing any action on a fresh tree.
+        if (!OverviewDetector.isOverviewVisible(windows, service.getPackageName(), service)) {
+            finishFailure(false);
+            return;
+        }
+        if (timeoutMs > 0 && SystemClock.uptimeMillis() - startedAt >= timeoutMs) {
+            finishFailure(false);
+            return;
+        }
         AccessibilityNodeInfo clear = OverviewDetector.findClearAllButton(
                 windows, service.getPackageName(), service);
         if (clear != null) {
@@ -81,20 +93,31 @@ final class ClearAllController {
             }
         }
 
-        if (!OverviewDetector.isOverviewVisible(windows, service.getPackageName(), service)) {
-            finishFailure(false);
-            return;
-        }
-
         if (attempts == 0 && !OverviewDetector.hasRecentTasks(
                 windows, service.getPackageName(), service)) {
             finishFailure(true);
             return;
         }
 
-        if (timeoutMs > 0 && SystemClock.uptimeMillis() - startedAt >= timeoutMs) {
-            finishFailure(false);
-            return;
+        if (!revealAttempted) {
+            revealAttempted = true;
+            AccessibilityNodeInfo target = OverviewDetector.findClearAllButtonToReveal(
+                    windows, service.getPackageName(), service);
+            if (target != null) {
+                boolean revealed;
+                try {
+                    revealed = target.performAction(
+                            AccessibilityNodeInfo.AccessibilityAction.ACTION_SHOW_ON_SCREEN.getId());
+                } finally {
+                    target.recycle();
+                }
+                if (revealed) {
+                    // Never click the off-screen node. Re-read the tree on the next step.
+                    // A launcher that accepts without revealing gets only this one attempt.
+                    schedule(REVEAL_SETTLE_MS);
+                    return;
+                }
+            }
         }
 
         attempts++;

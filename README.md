@@ -4,20 +4,27 @@ Pixelate dodaje stały przycisk „Wyczyść wszystko” u dołu widoku Ostatnic
 
 Wydanie produkcyjne uruchamia się wyłącznie na fizycznych urządzeniach, dla których producent i marka to Google, a model zaczyna się od „Pixel”. Inny telefon otrzymuje ekran o braku obsługi, a usługa dostępności sama się wyłącza. Kontrolowany emulator Google SDK stanowi wyjątek wyłącznie na potrzeby testów.
 
-Po aktywacji przycisku aplikacja korzysta najpierw z natywnych akcji dostępności karuzeli Quickstep. Gdy launcher ich nie udostępnia, wykonuje gesty przesuwania, a na końcu naciska oryginalny ClearAllButton. Nie wymaga roota, Shizuku ani wtyczki Jieshuo.
+Po aktywacji przycisku aplikacja próbuje bezpośrednio pokazać systemowy ClearAllButton. Jeśli launcher nie obsługuje tego polecenia lub go nie wykona, Pixelate korzysta z dotychczasowych akcji przewijania karuzeli i gestów zapasowych. Kliknięcie następuje po ponownym odczytaniu widocznego przycisku. Nie wymaga roota, Shizuku ani wtyczki Jieshuo.
 
 Interfejs ma dwa języki: polski jest wybierany wyłącznie dla polskiego języka systemu, a angielski stanowi wariant bazowy dla każdego innego języka.
 
 ## Wydanie
 
-- Gotowe APK: dist/Pixelate-1.4.1.apk
+- Gotowe APK: dist/Pixelate-1.4.2.apk (lokalna kopia także w installfiles)
 - Instrukcja instalacji: INSTRUKCJA.md
 - Kod usługi: app/src/main/java/pl/pixelate/PixelateAccessibilityService.java
 - Logika czyszczenia: app/src/main/java/pl/pixelate/ClearAllController.java
 - Wykrywanie Ostatnich: app/src/main/java/pl/pixelate/OverviewDetector.java
 - Nakładka: app/src/main/java/pl/pixelate/OverlayController.java
 
-## Co wnosi 1.4.1
+## Co wnosi 1.4.2
+
+- Jednorazowa próba bezpośredniego pokazania systemowego przycisku przyspiesza czyszczenie długiej listy aplikacji.
+- Odmowa, brak obsługi lub brak efektu uruchamiają dotychczasową metodę przewijania.
+- Zachowano anulowanie operacji i ustawiony limit czasu; szybka próba nie dodaje pracy w tle poza czyszczeniem.
+- Szczegóły pomiarów i testów awaryjnych: [weryfikacja 1.4.2](tests/VERIFICATION-1.4.2.md).
+
+## Co wniosła 1.4.1
 
 - Przerwanie czyszczenia przyciskiem Wstecz lub wyjściem z Ostatnich zawsze ponownie aktywuje przycisk.
 - Dodatkowa kontrola przed pokazaniem nakładki naprawia także rzadki wyścig zdarzeń, który mógł pozostawić przycisk w stanie „Czyszczenie”.

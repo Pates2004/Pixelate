@@ -57,6 +57,17 @@ final class OverviewDetector {
 
     static AccessibilityNodeInfo findClearAllButton(
             List<AccessibilityWindowInfo> windows, String ownPackage, Context context) {
+        return findClearAllButton(windows, ownPackage, context, false);
+    }
+
+    static AccessibilityNodeInfo findClearAllButtonToReveal(
+            List<AccessibilityWindowInfo> windows, String ownPackage, Context context) {
+        return findClearAllButton(windows, ownPackage, context, true);
+    }
+
+    private static AccessibilityNodeInfo findClearAllButton(
+            List<AccessibilityWindowInfo> windows, String ownPackage, Context context,
+            boolean revealOnly) {
         if (windows == null) {
             return null;
         }
@@ -74,7 +85,7 @@ final class OverviewDetector {
                         || !looksLikeOverviewWindow(window, root, context)) {
                     continue;
                 }
-                AccessibilityNodeInfo match = findClearNode(root, new int[]{NODE_BUDGET});
+                AccessibilityNodeInfo match = findClearNode(root, new int[]{NODE_BUDGET}, revealOnly);
                 if (match != null) {
                     return match;
                 }
@@ -333,14 +344,20 @@ final class OverviewDetector {
         return score;
     }
 
-    private static AccessibilityNodeInfo findClearNode(AccessibilityNodeInfo node, int[] remaining) {
+    private static AccessibilityNodeInfo findClearNode(
+            AccessibilityNodeInfo node, int[] remaining, boolean revealOnly) {
         if (node == null || remaining[0]-- <= 0) {
             return null;
         }
         String id = lower(node.getViewIdResourceName());
         String label = normalize(string(node.getText()) + " " + string(node.getContentDescription()));
-        if (node.isVisibleToUser() && node.isEnabled()
-                && (id.contains("clear_all") || id.contains("dismiss_all") || isClearLabel(label))) {
+        boolean matches = revealOnly
+                ? isResourceId(id, "clear_all")
+                    && node.getActionList().contains(
+                            AccessibilityNodeInfo.AccessibilityAction.ACTION_SHOW_ON_SCREEN)
+                : node.isVisibleToUser()
+                    && (id.contains("clear_all") || id.contains("dismiss_all") || isClearLabel(label));
+        if (node.isEnabled() && matches) {
             return AccessibilityNodeInfo.obtain(node);
         }
         for (int i = 0; i < node.getChildCount() && remaining[0] > 0; i++) {
@@ -349,7 +366,7 @@ final class OverviewDetector {
                 continue;
             }
             try {
-                AccessibilityNodeInfo result = findClearNode(child, remaining);
+                AccessibilityNodeInfo result = findClearNode(child, remaining, revealOnly);
                 if (result != null) {
                     return result;
                 }
