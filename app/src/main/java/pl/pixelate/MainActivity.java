@@ -34,10 +34,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public final class MainActivity extends Activity {
     private static final long TIMEOUT_AUTO_SAVE_DELAY_MS = 900;
+    private static WeakReference<MainActivity> resumedActivity = new WeakReference<>(null);
 
     private final Handler preferencesHandler = new Handler(Looper.getMainLooper());
     private final Runnable timeoutSaveRunnable = () -> persistTimeout(false);
@@ -68,13 +70,24 @@ public final class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        resumedActivity = new WeakReference<>(this);
         updateStatus();
     }
 
     @Override
     protected void onPause() {
+        if (resumedActivity.get() == this) {
+            resumedActivity.clear();
+        }
         persistTimeout(false);
         super.onPause();
+    }
+
+    static void onServiceConnectionChanged() {
+        MainActivity activity = resumedActivity.get();
+        if (activity != null) {
+            activity.updateStatus();
+        }
     }
 
     @Override

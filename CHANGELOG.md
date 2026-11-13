@@ -1,5 +1,16 @@
 # Historia zmian
 
+## 1.4.3 — 2026-11-13
+
+- Naprawiono pomijanie Ostatnich, gdy zdarzenie okna wyprzedza gotowość jego drzewa dostępności. Ograniczone ponowienia trwają najwyżej 2,5 s od zmiany okna i dotyczą wyłącznie launchera lub chwilowo niedostępnego drzewa.
+- Nowe pilniejsze zdarzenie okna może przyspieszyć zaplanowany odczyt, zamiast czekać na starszy termin stabilizacji.
+- Rozpoznawanie starszego Quickstep nie wymaga już konkretnego tytułu okna, jeśli widoczny jest jawny kontener Ostatnich.
+- Na Androidzie 9/10 zwiększono odstęp po natywnej akcji przewijania do 600 ms, aby stara karuzela mogła zakończyć animację.
+- Stan usługi w otwartym oknie aplikacji odświeża się po połączeniu i zakończeniu usługi.
+- Opis przycisku dla czytnika odpowiada stanowi czyszczenia; nazwy okna i panelu aktualizują się po zmianie języka.
+- Zachowano minSdk 28, targetSdk 35, regułę fizycznych Pixeli i dotychczasowy klucz podpisu. Rozszerzono tylko testowy wyjątek starszych emulatorów Google. versionCode 11.
+- Uporządkowano lokalne artefakty według bieżących instrukcji: aktualny APK w installfiles, stare pliki poza indeksem Git i w centralnym Trash. Opublikowanych poprzednich wydań GitHub nie usuwano.
+
 ## 1.4.2 — 2026-09-08
 
 - Dodano jednorazową próbę ACTION_SHOW_ON_SCREEN na systemowym clear_all przed przewijaniem kart.

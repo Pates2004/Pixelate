@@ -1,12 +1,12 @@
-# Pixelate 1.4.2 — instalacja i używanie
+# Pixelate 1.4.3 — instalacja i używanie
 
 ## Aktualizacja z wcześniejszej wersji
 
-Zainstaluj Pixelate-1.4.2.apk bez odinstalowywania poprzedniej wersji. Android zachowa ustawienia aplikacji i pozwoli na aktualizację, ponieważ wydania są podpisane tym samym kluczem. Po aktualizacji sprawdź, czy Android pozostawił usługę Pixelate włączoną.
+Zainstaluj Pixelate-1.4.3.apk bez odinstalowywania poprzedniej wersji. Android zachowa ustawienia aplikacji i pozwoli na aktualizację, ponieważ wydania są podpisane tym samym kluczem. Po aktualizacji sprawdź, czy Android pozostawił usługę Pixelate włączoną.
 
 ## Pierwsza instalacja
 
-1. Skopiuj Pixelate-1.4.2.apk na telefon, na przykład do folderu Pobrane.
+1. Skopiuj Pixelate-1.4.3.apk na telefon, na przykład do folderu Pobrane.
 2. Otwórz plik i wybierz Instaluj.
 3. Jeśli Android poprosi o zgodę na instalowanie z tego źródła, zezwól aplikacji Pliki, wróć i ponownie wybierz Instaluj.
 4. Otwórz Pixelate.
@@ -32,7 +32,7 @@ Pixelate automatycznie używa polskiego, gdy językiem systemu jest polski. Przy
 
 ## Obsługiwane urządzenia
 
-Pixelate działa wyłącznie na fizycznych urządzeniach Google Pixel. Na innym telefonie pokaże dostępny komunikat o braku obsługi i przycisk zamknięcia. Jeśli ktoś mimo to spróbuje włączyć usługę dostępności, usługa sama się wyłączy i nie będzie pracować w tle. Emulator Google używany do testów jest jedynym wyjątkiem niebędącym fizycznym Pixelem.
+Pixelate wymaga Androida 9 lub nowszego i działa wyłącznie na fizycznych urządzeniach Google Pixel. Na innym telefonie pokaże dostępny komunikat o braku obsługi i przycisk zamknięcia. Jeśli ktoś mimo to spróbuje włączyć usługę dostępności, usługa sama się wyłączy i nie będzie pracować w tle. Emulator Google używany do testów jest jedynym wyjątkiem niebędącym fizycznym Pixelem.
 
 W głównym oknie aplikacji pojedyncza informacja „Twój telefon” pokazuje dokładny model zgłaszany przez Androida, na przykład „Twój telefon: Pixel 11”. Nie jest to osobna karta ani zakładka. Przy angielskim języku systemu pojawia się „Your phone: Pixel 11”.
 

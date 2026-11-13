@@ -9,11 +9,30 @@ public final class DeviceSupportTest {
     @Test
     public void acceptsPhysicalPixels() {
         assertTrue(DeviceSupport.isSupportedIdentity(
+                "Google", "google", "Pixel", false));
+        assertTrue(DeviceSupport.isSupportedIdentity(
+                "Google", "google", "Pixel XL", false));
+        assertTrue(DeviceSupport.isSupportedIdentity(
+                "Google", "google", "Pixel 2 XL", false));
+        assertTrue(DeviceSupport.isSupportedIdentity(
+                "Google", "google", "Pixel 3a", false));
+        assertTrue(DeviceSupport.isSupportedIdentity(
+                "Google", "google", "Pixel 4a (5G)", false));
+        assertTrue(DeviceSupport.isSupportedIdentity(
                 "Google", "google", "Pixel 11 Pro", false));
         assertTrue(DeviceSupport.isSupportedIdentity(
                 "Google", "google", "Pixel Fold", false));
         assertTrue(DeviceSupport.isSupportedIdentity(
                 "Google", "google", "Pixel Tablet", false));
+    }
+
+    @Test
+    public void legacyGoogleEmulatorNamesDoNotPermitPhysicalNonPixels() {
+        for (String model : new String[]{"Android SDK built for x86", "Android SDK built for x86_64"}) {
+            assertTrue(DeviceSupport.isSupportedIdentity("Google", "google", model, true));
+            assertFalse(DeviceSupport.isSupportedIdentity("Google", "google", model, false));
+            assertFalse(DeviceSupport.isSupportedIdentity("Samsung", "samsung", model, true));
+        }
     }
 
     @Test

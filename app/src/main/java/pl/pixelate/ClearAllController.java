@@ -144,7 +144,9 @@ final class ClearAllController {
         }
 
         if (scrolled) {
-            schedule(135);
+            // Android 9/10 Quickstep commits the page only when its animation
+            // finishes. Reissuing the action too soon restarts the same page.
+            schedule(Build.VERSION.SDK_INT < Build.VERSION_CODES.R ? 600 : 135);
         } else {
             dispatchSwipeTowardClearAll();
             schedule(230);

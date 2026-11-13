@@ -1,0 +1,7 @@
+def outputRoot = System.getenv('PIXELATE_BUILD_ROOT')
+if (!outputRoot) {
+    throw new GradleException('PIXELATE_BUILD_ROOT must be set when using central-build.gradle')
+}
+allprojects { project ->
+    project.layout.buildDirectory.set(new File(outputRoot, project.name))
+}

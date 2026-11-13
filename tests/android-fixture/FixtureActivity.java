@@ -2,9 +2,12 @@ package pl.pixelate.testlauncher;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -15,17 +18,20 @@ public class FixtureActivity extends Activity {
     private int scrolls;
     private String mode;
     private Button clear;
+    private boolean treeReady = true;
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
         mode = getIntent().getStringExtra("mode");
-        setTitle("Recent apps");
+        treeReady = !"delayed".equals(mode);
+        setTitle("legacy-title".equals(mode) ? "Pixel Launcher" : "Recent apps");
         LinearLayout root = new LinearLayout(this);
         root.setOrientation(LinearLayout.VERTICAL);
         root.setId(R.id.overview_panel);
         root.setAccessibilityDelegate(new View.AccessibilityDelegate() {
             @Override public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
                 super.onInitializeAccessibilityNodeInfo(host, info);
+                info.setVisibleToUser(treeReady);
                 info.setClassName("android.widget.ListView");
                 info.setScrollable(true);
                 info.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SCROLL_BACKWARD);
@@ -43,6 +49,12 @@ public class FixtureActivity extends Activity {
         Button task = new Button(this);
         task.setId(R.id.task);
         task.setText("Fixture task");
+        task.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+            @Override public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
+                super.onInitializeAccessibilityNodeInfo(host, info);
+                info.setVisibleToUser(treeReady);
+            }
+        });
         root.addView(task, new LinearLayout.LayoutParams(-1, 500));
         clear = new Button(this);
         clear.setId(R.id.clear_all);
@@ -50,7 +62,7 @@ public class FixtureActivity extends Activity {
         clear.setAccessibilityDelegate(new View.AccessibilityDelegate() {
             @Override public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
                 super.onInitializeAccessibilityNodeInfo(host, info);
-                info.setVisibleToUser(revealed);
+                info.setVisibleToUser(treeReady && revealed);
                 info.setClickable(revealed);
                 if (!revealed) info.removeAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_CLICK);
                 if ("unsupported".equals(mode)) info.removeAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SHOW_ON_SCREEN);
@@ -60,7 +72,7 @@ public class FixtureActivity extends Activity {
                     reveals++;
                     Log.i("PixelateFixture", "REVEAL mode=" + mode + " count=" + reveals);
                     if ("reject".equals(mode)) return false;
-                    if ("success".equals(mode)) reveal();
+                    if ("success".equals(mode) || "legacy-title".equals(mode)) reveal();
                     return true;
                 }
                 return super.performAccessibilityAction(host, action, args);
@@ -72,6 +84,19 @@ public class FixtureActivity extends Activity {
         });
         root.addView(clear, new LinearLayout.LayoutParams(-1, 150));
         setContentView(root);
+        if (!treeReady) {
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                treeReady = true;
+                Log.i("PixelateFixture", "TREE_READY mode=" + mode);
+                root.sendAccessibilityEvent(android.view.accessibility.AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED);
+            }, 1500);
+        }
+        if ("interrupt".equals(mode)) {
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                ((AccessibilityManager) getSystemService(ACCESSIBILITY_SERVICE)).interrupt();
+                Log.i("PixelateFixture", "FEEDBACK_INTERRUPTED");
+            }, 1500);
+        }
     }
 
     private void reveal() {

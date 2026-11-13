@@ -28,11 +28,11 @@
     <string name="timeout_explanation">Domyślnie 20 sekund. Wartość 0 oznacza szukanie bez limitu i może zużywać baterię, jeśli Pixel Launcher zmieni sposób działania.</string>
     <string name="timeout_invalid">Wpisz pełną liczbę sekund.</string>
     <string name="timeout_range">Dozwolona wartość mieści się w zakresie od 0 do 300.</string>
-    <string name="battery_explanation">Oszczędzanie baterii: poza ekranem Ostatnich Pixelate reaguje tylko na zmiany okien. Nie skanuje zawartości zwykłych aplikacji, nie działa w pętli i nie używa sieci, alarmów ani blokady wybudzenia. Niewielka usługa dostępności pozostaje w pamięci, aby przycisk mógł pojawić się natychmiast.</string>
+    <string name="battery_explanation">Oszczędzanie baterii: poza Ostatnimi Pixelate reaguje na zmiany okien. Podczas przejścia do launchera może krótko ponawiać rozpoznawanie, maksymalnie przez 2,5 sekundy. Nie skanuje stale zwykłych aplikacji i nie używa sieci, alarmów ani blokady wybudzenia. Niewielka usługa dostępności pozostaje w pamięci.</string>
     <string name="how_it_works_heading">Jak to działa</string>
     <string name="how_it_works_body">1. Włącz usługę Pixelate w ustawieniach dostępności.\n\n2. Otwórz ekran ostatnich aplikacji w zwykły sposób.\n\n3. Jeśli są otwarte aplikacje, na dole pojawi się przycisk „Wyczyść wszystko”. Przy pustej liście nie będzie pokazywany.\n\n4. Naciśnij przycisk. Pixelate sam przewinie karuzelę i uruchomi systemowe czyszczenie.</string>
     <string name="privacy_heading">Prywatność</string>
-    <string name="privacy_body">Pixelate działa wyłącznie na urządzeniu, nie ma dostępu do internetu i niczego nie wysyła. Usługa reaguje tylko na zmiany okien i sprawdza strukturę Pixel Launchera wyłącznie na ekranie ostatnich aplikacji.</string>
+    <string name="privacy_body">Pixelate działa wyłącznie na urządzeniu, nie ma dostępu do internetu i niczego nie wysyła. Korzysta ze zmian okien i struktury dostępności launchera, aby rozpoznać Ostatnie i obsłużyć ich przycisk Wyczyść wszystko.</string>
     <string name="icon_description">Pikselowa, uśmiechnięta twarz – ikona Pixelate</string>
     <string name="unsupported_heading">Nieobsługiwane urządzenie</string>
     <string name="unsupported_message">Pixelate obsługuje wyłącznie fizyczne urządzenia Google Pixel z Pixel Launcherem. Na tym urządzeniu nie zostanie uruchomione. Wykryte urządzenie: %1$s %2$s.</string>
